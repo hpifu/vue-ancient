@@ -10,15 +10,25 @@
     <v-spacer></v-spacer>
     <v-text-field
       v-model="search"
-      prepend-inner-icon="search"
-      :label="'搜索 ' + $config.org + ' 账户'"
+      append-icon="mdi-magnify"
       single-line
       rounded
-      clearable
-      clear-icon="clear"
       class="mt-9"
       filled
       full-width
+      @click:append="$router.push('/search?q='+search)"
     ></v-text-field>
+    <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
   </v-app-bar>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      search: ""
+    };
+  }
+};
+</script>
