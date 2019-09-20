@@ -13,8 +13,18 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueConfig, config);
 
+const router = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  routes: [
+    { path: '/', redirect: '/ancient/' },
+    { path: '/ancient/:id' }
+  ]
+})
+
 new Vue({
   vuetify,
   store,
+  router,
   render: h => h(App)
 }).$mount('#app')
