@@ -16,6 +16,7 @@ const axios = require("axios");
 
 export default {
   beforeMount() {
+    // this.$router.query.keyword
     axios
       .get(this.$config.api.ancient + "/ancient", {
         withCredentials: true

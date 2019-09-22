@@ -16,7 +16,8 @@
 
 <style>
 #app {
-  font-family: "Josefin Sans", "ZCOOL XiaoWei", sans-serif;
+  /* font-family: "Josefin Sans", "ZCOOL XiaoWei", sans-serif; */
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

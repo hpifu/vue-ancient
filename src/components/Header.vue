@@ -9,14 +9,14 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-text-field
-      v-model="search"
+      v-model="keyword"
       append-icon="mdi-magnify"
       single-line
       rounded
       class="mt-9"
       filled
       full-width
-      @click:append="$router.push('/search?q='+search)"
+      @click:append="$router.push('/search?q='+keyword)"
     ></v-text-field>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
@@ -27,7 +27,7 @@
 export default {
   data() {
     return {
-      search: ""
+      keyword: ""
     };
   }
 };
