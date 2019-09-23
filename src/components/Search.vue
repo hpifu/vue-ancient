@@ -16,9 +16,13 @@ const axios = require("axios");
 
 export default {
   beforeMount() {
-    // this.$router.query.keyword
     axios
-      .get(this.$config.api.ancient + "/ancient", {
+      .get(this.$config.api.ancient + "/search", {
+        params: {
+          q: this.$route.query.q,
+          offset: this.offset,
+          limit: this.limit
+        },
         withCredentials: true
       })
       .then(res => {
@@ -36,7 +40,9 @@ export default {
   },
   data() {
     return {
-      ancients: []
+      ancients: [],
+      offset: 0,
+      limit: 20
     };
   }
 };
