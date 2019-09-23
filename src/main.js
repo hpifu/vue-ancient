@@ -17,7 +17,7 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/', redirect: '/ancient/' },
+    { path: '/', redirect: '/search' },
     { path: '/ancient/:id', component: () => import('./components/Ancient') },
     { path: '/search', component: () => import('./components/Search') }
   ]
