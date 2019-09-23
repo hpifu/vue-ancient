@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+  vue-ancient:
+    image: hatlonely/vue-ancient:${version}
+    hostname: vue-ancient
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - vue-ancientnet
+networks:
+  vue-ancientnet:
+    name: vue-ancientnet
