@@ -6,12 +6,14 @@ import config from './configs/config';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import App from './App.vue'
+import TextHighlight from 'vue-text-highlight';
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueConfig, config);
+Vue.component('text-highlight', TextHighlight);
 
 const router = new VueRouter({
   mode: 'history',
