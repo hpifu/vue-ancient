@@ -5,13 +5,13 @@
     <v-spacer></v-spacer>
     <v-text-field
       v-model="query"
-      append-icon="mdi-magnify"
+      append-outer-icon="mdi-magnify"
       single-line
-      rounded
       class="mt-9"
       filled
       full-width
-      @click:append="$store.dispatch('ancient/search')"
+      @click:append-outer="search"
+      @keydown.enter="search"
     ></v-text-field>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
@@ -26,6 +26,14 @@ export default {
   components: {
     Logo,
     SubLogo
+  },
+  methods: {
+    search() {
+      this.$store.dispatch("ancient/search");
+      if (this.$route.path != "/search") {
+        this.$router.push("/search");
+      }
+    }
   },
   computed: {
     query: {
