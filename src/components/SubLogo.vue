@@ -1,11 +1,10 @@
 <template>
-  <v-toolbar-title>
-    <span class="font-weight-light cyan--text hlogo">ancient</span>
-  </v-toolbar-title>
+  <span class="cyan--text hlogo-text">ancient</span>
 </template>
 
 <style>
-span.hlogo {
-  font-family: "ZCOOL XiaoWei";
+span.hlogo-text {
+  font-family: "Monoton";
+  font-size: 1.2rem;
 }
 </style>

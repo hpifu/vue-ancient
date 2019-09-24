@@ -1,11 +1,10 @@
 <template>
-  <h2 class="teal--text hlogo">
-    <strong>{{this.$config.org}}</strong>
-  </h2>
+  <span class="teal--text hlogo-title">{{this.$config.org}}</span>
 </template>
 
 <style>
-h2.hlogo {
-  font-family: "ZCOOL XiaoWei";
+span.hlogo-title {
+  font-family: "Monoton";
+  font-size: 1.5rem;
 }
 </style>
