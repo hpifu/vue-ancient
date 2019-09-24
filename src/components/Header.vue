@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app clipped-left elevate-on-scroll class="pb-3" color="#fafafa">
-    <Logo />&nbsp;&nbsp;
-    <SubLogo />
+    <Logo :value="$config.org" />&nbsp;&nbsp;
+    <SubLogo value="ancient" />
     <v-spacer></v-spacer>
     <v-text-field
       v-model="query"
