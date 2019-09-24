@@ -16,31 +16,20 @@ const axios = require("axios");
 
 export default {
   beforeMount() {
-    axios
-      .get(this.$config.api.ancient + "/search", {
-        params: {
-          q: this.$route.query.q,
-          offset: this.offset,
-          limit: this.limit
-        },
-        withCredentials: true
-      })
-      .then(res => {
-        console.log(res);
-        if (res.status == 204) {
-          // nothing to do
-        }
-        if (res.status == 200) {
-          this.ancients = res.data;
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.$store.dispatch("ancient/search");
+  },
+  computed: {
+    ancients: {
+      get() {
+        return this.$store.state.ancient.ancients;
+      },
+      set(ancients) {
+        this.$store.commit("ancient/setAncients", ancients);
+      }
+    }
   },
   data() {
     return {
-      ancients: [],
       offset: 0,
       limit: 20
     };

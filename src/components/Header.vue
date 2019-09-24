@@ -9,14 +9,14 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-text-field
-      v-model="keyword"
+      v-model="query"
       append-icon="mdi-magnify"
       single-line
       rounded
       class="mt-9"
       filled
       full-width
-      @click:append="$router.push('/search?q='+keyword)"
+      @click:append="$store.dispatch('ancient/search')"
     ></v-text-field>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
@@ -25,10 +25,18 @@
 
 <script>
 export default {
+  computed: {
+    query: {
+      get() {
+        return this.$store.state.ancient.query;
+      },
+      set(query) {
+        this.$store.commit("ancient/setQuery", query);
+      }
+    }
+  },
   data() {
-    return {
-      keyword: ""
-    };
+    return {};
   }
 };
 </script>

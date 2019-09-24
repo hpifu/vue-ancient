@@ -1,15 +1,15 @@
 import api from '../api/api'
 
 const state = {
-    author: "",
+    query: "",
     offset: 0,
     ancients: [],
     index: 0
 }
 
 const mutations = {
-    setAuthor(state, value) {
-        state.author = value;
+    setQuery(state, value) {
+        state.query = value;
     },
     setOffset(state, value) {
         state.offset = value;
@@ -17,48 +17,31 @@ const mutations = {
     setIndex(state, value) {
         state.index = value;
     },
-    ancients(state, value) {
+    setAncients(state, value) {
         state.ancients = value;
     }
 }
 
 const actions = {
-    async currAncient({ state }) {
-        if (!state.ancients || state.index >= state.ancients.length) {
-            state.index = 0;
-            state.offset += state.ancients.length;
-            if (state.author) {
-                const res = await api.author(state.author, state.offset, 20)
-                state.ancients = res.data
-            } else {
-                const res = await api.ancients(state.offset, 20)
-                state.ancients = res.data
+    search({ commit, state }) {
+        console.log(state.query)
+        api.search({
+            query: state.query,
+            limit: 20,
+            offset: state.offset,
+        }, res => {
+            console.log(res);
+            if (res.status == 204) {
+                // nothing to do
             }
-        }
-        if (state.index < 0) {
-            state.index = 19;
-            state.offset -= 20;
-            if (state.offset < 0) {
-                state.offset = 0;
-                state.index = 0;
+            if (res.status == 200) {
+                commit("setAncients", res.data)
+                this.ancients = res.data;
             }
-            if (state.author) {
-                const res = await api.author(state.author, state.offset, 20)
-                state.ancients = res.data
-            } else {
-                const res = await api.ancients(state.offset, 20)
-                state.ancients = res.data
-            }
-        }
-        const res = await api.ancient(state.ancients[state.index].id);
-        return res.data;
-    },
-    async nextAncient({ state }) {
-        state.index++;
-    },
-    async prevAncient({ state }) {
-        state.index--;
-    },
+        }, err => {
+            console.log(err);
+        })
+    }
 }
 
 export default {
