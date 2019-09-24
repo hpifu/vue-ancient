@@ -8,14 +8,13 @@
 
 <script>
 const axios = require("axios");
+import api from "../api/api";
 
 export default {
   beforeMount() {
-    axios
-      .get(this.$config.api.ancient + "/ancient/" + this.$route.params.id, {
-        withCredentials: true
-      })
-      .then(res => {
+    api.ancient(
+      this.$route.params.id,
+      res => {
         console.log(res);
         if (res.status == 204) {
           this.content = "204 NO CONTENT 没有该页面";
@@ -27,10 +26,11 @@ export default {
           this.content = res.data.content;
           this.content = this.content.replace(/\n/g, "<br />");
         }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      },
+      err => {
+        console.log(err);
+      }
+    );
   },
   data() {
     return {
