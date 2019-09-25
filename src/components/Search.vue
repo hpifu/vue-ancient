@@ -32,8 +32,11 @@ export default {
   },
   methods: {
     loadMore() {
-      console.log("loadMore");
       this.busy = true;
+      if (this.$store.state.ancient.done) {
+        this.busy = false;
+        return;
+      }
       this.$store.dispatch("ancient/loadMore", () => {
         this.busy = false;
       });

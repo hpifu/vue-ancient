@@ -5,7 +5,7 @@ const state = {
     offset: 0,
     limit: 20,
     ancients: [],
-    index: 0
+    done: false,
 }
 
 const mutations = {
@@ -15,8 +15,8 @@ const mutations = {
     setOffset(state, value) {
         state.offset = value;
     },
-    setIndex(state, value) {
-        state.index = value;
+    setDone(state, value) {
+        state.done = value;
     },
     setAncients(state, value) {
         state.ancients = value;
@@ -38,6 +38,9 @@ const actions = {
             }
             if (res.status == 200) {
                 commit("setAncients", res.data);
+                if (res.data.length != state.limit) {
+                    commit("setDone", true);
+                }
             }
         }, err => {
             console.log(err);
@@ -45,6 +48,9 @@ const actions = {
     },
     loadMore({ commit, state }, callback) {
         commit("setOffset", state.offset + state.limit);
+        if (state.Done) {
+            return;
+        }
         api.search({
             query: state.query,
             limit: state.limit,
@@ -55,6 +61,9 @@ const actions = {
             }
             if (res.status == 200) {
                 commit("appendAncients", res.data);
+                if (res.data.length != state.limit) {
+                    commit("setDone", true);
+                }
             }
             callback()
         }, err => {
