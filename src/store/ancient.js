@@ -23,31 +23,16 @@ const mutations = {
     },
     appendAncients(state, as) {
         state.ancients.push(...as);
+    },
+    reset(state) {
+        state.offset = 0;
+        state.done = false;
+        state.ancients = [];
     }
 }
 
 const actions = {
-    search({ commit, state }) {
-        api.search({
-            query: state.query,
-            limit: state.limit,
-            offset: state.offset,
-        }, res => {
-            if (res.status == 204) {
-                // nothing to do
-            }
-            if (res.status == 200) {
-                commit("setAncients", res.data);
-                if (res.data.length != state.limit) {
-                    commit("setDone", true);
-                }
-            }
-        }, err => {
-            console.log(err);
-        })
-    },
     loadMore({ commit, state }, callback) {
-        commit("setOffset", state.offset + state.limit);
         if (state.Done) {
             return;
         }
@@ -65,6 +50,7 @@ const actions = {
                     commit("setDone", true);
                 }
             }
+            commit("setOffset", state.offset + state.limit);
             callback()
         }, err => {
             console.log(err);

@@ -31,9 +31,6 @@
 const axios = require("axios");
 
 export default {
-  beforeMount() {
-    this.$store.dispatch("ancient/search");
-  },
   methods: {
     loadMore() {
       this.busy = true;
@@ -58,8 +55,6 @@ export default {
   },
   data() {
     return {
-      offset: 0,
-      limit: 20,
       busy: false
     };
   }
