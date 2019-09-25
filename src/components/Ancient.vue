@@ -1,5 +1,5 @@
 <template>
-  <v-card flat outlined width="100%" class="py-10">
+  <v-card flat outlined width="100%" class="py-10 px-12">
     <h2>{{this.title}}</h2>
     <h3 class="my-5">{{this.author}} {{this.dynasty}}</h3>
     <p v-html="content"></p>
