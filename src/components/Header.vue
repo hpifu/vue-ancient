@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     search() {
+      this.$store.commit("ancient/setOffset", 0);
       this.$store.dispatch("ancient/search");
       if (this.$route.path != "/search") {
         this.$router.push("/search");
