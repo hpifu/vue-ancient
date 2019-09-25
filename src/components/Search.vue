@@ -1,6 +1,6 @@
 <template>
   <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-    <v-card flat outlined width="100%" class="py-10">
+    <v-card flat outlined width="100%" class="py-10 px-12">
       <template v-for="(ancient, i) in ancients">
         <v-list-item three-line :key="i" :to="'/ancient/'+ancient.id">
           <v-list-item-content>
