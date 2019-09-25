@@ -3,6 +3,7 @@ import api from '../api/api'
 const state = {
     query: "",
     offset: 0,
+    limit: 20,
     ancients: [],
     index: 0
 }
@@ -19,25 +20,43 @@ const mutations = {
     },
     setAncients(state, value) {
         state.ancients = value;
+    },
+    appendAncients(state, as) {
+        state.ancients.push(...as);
     }
 }
 
 const actions = {
     search({ commit, state }) {
-        console.log(state.query)
         api.search({
             query: state.query,
             limit: 20,
             offset: state.offset,
         }, res => {
-            console.log(res);
             if (res.status == 204) {
                 // nothing to do
             }
             if (res.status == 200) {
-                commit("setAncients", res.data)
-                this.ancients = res.data;
+                commit("setAncients", res.data);
             }
+        }, err => {
+            console.log(err);
+        })
+    },
+    loadMore({ commit, state }, callback) {
+        commit("setOffset", state.offset + state.limit);
+        api.search({
+            query: state.query,
+            limit: 20,
+            offset: state.offset,
+        }, res => {
+            if (res.status == 204) {
+                // nothing to do
+            }
+            if (res.status == 200) {
+                commit("appendAncients", res.data);
+            }
+            callback()
         }, err => {
             console.log(err);
         })
