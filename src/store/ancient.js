@@ -30,7 +30,7 @@ const actions = {
     search({ commit, state }) {
         api.search({
             query: state.query,
-            limit: 20,
+            limit: state.limit,
             offset: state.offset,
         }, res => {
             if (res.status == 204) {
@@ -47,7 +47,7 @@ const actions = {
         commit("setOffset", state.offset + state.limit);
         api.search({
             query: state.query,
-            limit: 20,
+            limit: state.limit,
             offset: state.offset,
         }, res => {
             if (res.status == 204) {
