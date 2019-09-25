@@ -5,16 +5,20 @@
         <v-list-item three-line :key="i" :to="'/ancient/'+ancient.id">
           <v-list-item-content>
             <v-list-item-title class="headline mb-1">
-              <text-highlight :queries="[$store.state.ancient.query]">{{ancient.title}}</text-highlight>
+              <text-highlight
+                :queries="$store.state.ancient.query.split(/[，。、？！； ,.]/)"
+              >{{ancient.title}}</text-highlight>
             </v-list-item-title>
             <v-list-item-subtitle>
-              <text-highlight :queries="[$store.state.ancient.query]">
+              <text-highlight :queries="$store.state.ancient.query.split(/[，。、？！； ,.]/)">
                 {{ancient.author}}
                 {{ancient.dynasty}}
               </text-highlight>
             </v-list-item-subtitle>
             <v-list-item-subtitle>
-              <text-highlight :queries="[$store.state.ancient.query]">{{ancient.content}}</text-highlight>
+              <text-highlight
+                :queries="$store.state.ancient.query.split(/[，。、？！； ,.]/)"
+              >{{ancient.content}}</text-highlight>
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
