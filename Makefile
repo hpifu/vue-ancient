@@ -8,10 +8,10 @@ buildenv:
 
 .PHONY: image
 image:
-	docker exec -i vue-build-env rm -rf /data/src/hpifu/${repository}
-	docker exec -i vue-build-env mkdir -p /data/src/hpifu/${repository}
+	docker exec vue-build-env rm -rf /data/src/hpifu/${repository}
+	docker exec vue-build-env mkdir -p /data/src/hpifu/${repository}
 	docker cp . vue-build-env:/data/src/hpifu/${repository}
-	docker exec -i vue-build-env sh -c "cd /data/src/hpifu/${repository} && npm install && npm run build"
+	docker exec vue-build-env sh -c "cd /data/src/hpifu/${repository} && npm install && npm run build"
 	mkdir -p docker/
 	docker cp vue-build-env:/data/src/hpifu/${repository}/dist docker/
 	docker build --tag=hatlonely/${repository}:${version} .
