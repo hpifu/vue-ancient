@@ -8,7 +8,8 @@ services:
       restart_policy:
         condition: on-failure
     networks:
-      - vue-ancientnet
+      - online
 networks:
-  vue-ancientnet:
-    name: vue-ancientnet
+  online:
+    external: true
+    name: online
